@@ -1,0 +1,92 @@
+<extension version="3.x" type="plugin" group="user" method="upgrade">
+    <name>plg_user_changetemplate</name>
+	<author>Kian William Nowrouzian</author>
+	<creationDate>May 2024</creationDate>
+	<copyright>Copyright (C) 2016 - 2040</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>webarchitect@kwprodtuctions121.ir</authorEmail>
+	<authorUrl>http://www.extensions.kwproductions121.ir</authorUrl>
+	<version>1.0.0</version>
+	<scriptfile>script.php</scriptfile>
+	<description>
+	<![CDATA[To change template for a particular user(s) or group(s)!<br />
+	<a href="https://www.kwproductions121.ir"><img src="/plugins/user/changetemplate/logokw-productions.gif" /></a>
+	]]>
+	</description>
+	<updateservers>
+		<server type="extension" name="user changetemplate updates" priority="1">http://www.extensions.kwproductions121.ir/myextensions.xml</server>
+	</updateservers>
+	<files>
+		<filename plugin="changetemplate">changetemplate.php</filename>
+		<folder>assets</folder>
+				<folder>js</folder>
+				<folder>layout</folder>
+
+		<filename>index.html</filename>	
+				<filename>index.html</filename>	
+		<filename>logokw-productions.gif</filename>	
+
+
+	</files>
+	 <media folder="media" destination="plg_user_changetemplate">
+    <folder>js</folder>
+  </media>	
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_user_changetemplate.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_user_changetemplate.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			  <!--  <fieldset name="basic"  addfieldprefix="Joomla\Plugin\User\Changetemplate\Assets"> -->
+
+			<fieldset name="basic"  addfieldpath="plugins/user/changetemplate/assets">
+			<field 
+				name="users-groups" 
+				type="radio"
+				label="PLG_USER_CHANGE_TEMPLATE_LABEL"
+				description="PLG_USER_CHANGE_TEMPLATE_DESC"
+				default="0"
+				>
+				<option value="0">Users</option>
+				<option value="1">Groups</option>
+			</field>
+			
+			<field
+					name="ids"
+					type="text"
+					label="PLG_USER_CHANGE_TEMPLATE_IDS_LABEL"
+					required = "true"
+					
+				/>
+			
+				<field
+					name="menuitems-templates"
+					type="mtextarea"
+					label="PLG_USER_CHANGE_TEMPLATE_MENUITEMS_TEMPLATES_LABEL"
+					id="m-t"
+					required = "true"
+					hint="1, 2, ..."
+				/>
+				
+				<field
+					name="create-file-update-menu"
+					type="cfumfile"
+					label="PLG_USER_CHANGE_TEMPLATE_CREATE_FILE_LABEL"
+					id="cfum"
+				/>
+				
+				
+					<field
+					name="retun-menu-delete-file"
+					type="rmdfile"
+					label="PLG_USER_CHANGE_TEMPLATE_CREATE_FILE_LABEL"
+					id="rmd"
+				/>
+				
+				
+				
+				</fieldset>
+				</fields>
+		</config>
+	
+</extension>
