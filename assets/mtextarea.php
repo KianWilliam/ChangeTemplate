@@ -27,11 +27,11 @@ class JFormFieldMtextarea extends FormField{
                  $templates = $db->loadObjectList();
 				
 				 foreach($templates as $template):
-				    $html .= "Title:".$template->title."- id: ".$template->id."<br />";
+				    $html .= "Title:".$template->title."-Template Style id: ".$template->id."<br />";
 				 endforeach;
 
 		$html .= '<textarea  name="' . $this->name . '" id="' . $this->id . '"   class="form-control validate-victory"   aria-describedby="'.$this->id.'-desc">'.$this->value.'</textarea>';
-		$html.="<div>Copy and paste the structure below:</div>";
+		$html.="<div>Copy and paste the structure below:(You may use templatestyleid(s) from the list above)</div>";
 		$html.="<div>|menutitle@templatestyleid@|menutitle@templatestyleid@|</div>";
 		return $html;
 	}
