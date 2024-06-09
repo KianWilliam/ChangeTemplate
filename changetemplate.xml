@@ -55,7 +55,7 @@
 					name="ids"
 					type="text"
 					label="PLG_USER_CHANGE_TEMPLATE_IDS_LABEL"
-					required = "true"
+				
 					
 				/>
 			
@@ -64,7 +64,6 @@
 					type="mtextarea"
 					label="PLG_USER_CHANGE_TEMPLATE_MENUITEMS_TEMPLATES_LABEL"
 					id="m-t"
-					required = "true"
 					hint="1, 2, ..."
 				/>
 				
@@ -79,7 +78,7 @@
 					<field
 					name="retun-menu-delete-file"
 					type="rmdfile"
-					label="PLG_USER_CHANGE_TEMPLATE_CREATE_FILE_LABEL"
+					label="PLG_USER_DELETE_FILE_RETURN_TEMPLATE_LABEL"
 					id="rmd"
 				/>
 				

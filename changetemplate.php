@@ -54,15 +54,17 @@ class PlgUserChangetemplate extends CMSPlugin
 	{
 		
 		// 2 or more users login all their ids in the list check if file exists
-		if($this->app->isClient('site')):
+						$ids = $this->params->get("ids");
+						$ug = $this->params->get("users-groups");
+
+
+		if($this->app->isClient('site') && $ids!==NULL && !empty($ids) ):
 	
 		$app = $this->app;
 			
        if(!File::exists(JPATH_ROOT . '/plugins/user/changetemplate/template.txt'))
 		$this->saveFormerTemplate();
 		
-		$ug = $this->params->get("users-groups");
-				$ids = $this->params->get("ids");
 				$uorgids = explode(',', $ids);
 				$userflag = 0;
 				$groupflag = 0;
@@ -80,6 +82,7 @@ class PlgUserChangetemplate extends CMSPlugin
 			
 			if($userflag==1)
 			{
+				//check if it is not already updated. by #__menu table to #__session table 
 				$this->updateTemplateStyle();
 			}
 			
@@ -102,6 +105,7 @@ class PlgUserChangetemplate extends CMSPlugin
 			
 			if($groupflag==1)
 			{
+				//check if it is not already updated. by #__menu table to #__session table 
 				 $this->updateTemplateStyle();
 			}
 			
@@ -110,7 +114,7 @@ class PlgUserChangetemplate extends CMSPlugin
 		     else 
 		       return false;
 		   
-		    
+		   
 		
 		endif;
 		return true;
@@ -118,6 +122,8 @@ class PlgUserChangetemplate extends CMSPlugin
 	}
 	public function updateTemplateStyle()
 	{
+		//if called from buttons, check not to be empty in onclick function event or give alert, then this function would not be called
+		// if fields are empty.
 		$this->mtitems = [];
 			$mt = $this->params->get("menuitems-templates");
 				if(!empty($mt)):
@@ -129,7 +135,7 @@ class PlgUserChangetemplate extends CMSPlugin
 						$med[] = $mtitem;
 				}
 				$this->mtitems = $med;
-				endif;
+				
 		
 		
 		$db = $this->db;
@@ -157,6 +163,7 @@ class PlgUserChangetemplate extends CMSPlugin
 				 			 
 			
 		}
+		endif;
 		
 	}
 	
@@ -165,7 +172,7 @@ class PlgUserChangetemplate extends CMSPlugin
 	  
 	  if(File::exists(JPATH_ROOT . '/plugins/user/changetemplate/template.txt'))
 	  {
-		  
+		//here fields have no need to be checked  
 		  $stuff = file_get_contents(JPATH_ROOT . '/plugins/user/changetemplate/template.txt');
 		  
 		  if(!empty($stuff))
@@ -238,7 +245,7 @@ class PlgUserChangetemplate extends CMSPlugin
 	{
 		$this->mtitems = [];
 			$mt = $this->params->get("menuitems-templates");
-				if(!empty($mt)):
+				if($mt!=NULL && !empty($mt)):
 				$mtitems = explode('|', $mt);
 				$med = [];
 				foreach($mtitems as $mtitem)
@@ -247,7 +254,7 @@ class PlgUserChangetemplate extends CMSPlugin
 						$med[] = $mtitem;
 				}
 				$this->mtitems = $med;
-				endif;
+				
 		
 		
 		$stuff = "";
@@ -282,19 +289,22 @@ class PlgUserChangetemplate extends CMSPlugin
 			fclose($myfile);*/
 			file_put_contents(JPATH_ROOT . '/plugins/user/changetemplate/template.txt', $stuff);
 		}
+		
+		endif;
+		
 	}
 	
 	public function onUserLogout($credentials=[], $options=[])
 	{
 	    
-		
-		if($this->app->isClient('site')):
+			$ids = $this->params->get("ids");
+		if($this->app->isClient('site') && !empty($ids) && $ids!==NULL):
 		
 		//and also check table session(table session must be checked.) if other users or groups of this sort are still logged in
 		//better only to handle from the backsite		
 		
 		        $ug = $this->params->get("users-groups");
-				$ids = $this->params->get("ids");
+			
 				$uorgids = explode(',', $ids);
 				$userflag = 0;
 				$groupflag = 0;
